@@ -29,6 +29,15 @@ Kaggle (GPU T4/P100):
   - `ngrok` đã cài và token configured
   - HOẶC `cloudflared` đã cài (`brew install cloudflare/cloudflare/cloudflared`)
 
+## Chạy trên Google Colab được không?
+**Có, nhưng theo mô hình hybrid (không chạy full stack trên Colab).**
+
+- **Colab/Kaggle GPU:** chạy vLLM + embedding service và mở tunnel URL.
+- **Máy local:** chạy Docker Compose (Kafka, Prefect, Qdrant, Redis, Prometheus, Grafana, API Gateway).
+
+> Colab **không phù hợp** để chạy full Docker Compose production-like stack ổn định.
+> Cách đúng cho bài này là: **Local services + Colab/Kaggle GPU inference**.
+
 ## Quick Start
 
 ### 1. Khởi động Local Stack

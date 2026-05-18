@@ -5,7 +5,8 @@ import glob, os, redis, json
 r = redis.Redis(host="localhost", port=6379, decode_responses=True)
 
 def load_from_delta_and_push_feast():
-    files = glob.glob("delta-lake/raw/*.parquet")
+    delta_glob = os.environ.get("DELTA_RAW_GLOB", "delta-lake/raw/*.parquet")
+    files = glob.glob(delta_glob)
     if not files:
         print("No data in Delta Lake yet")
         return
